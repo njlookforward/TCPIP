@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     int strLen;
 
     if(argc != 3) {
-        printf("Usage: %s [ip] [port]\n", argv[0]);
+        printf("Usage: %s <ip> <port>\n", argv[0]);
         exit(-1);
     }
 
@@ -45,5 +45,5 @@ void error_handling(const char *msg)
 {
     fputs(msg, stderr);
     fputc('\n', stderr);
-    return;
+    exit(-1);
 }

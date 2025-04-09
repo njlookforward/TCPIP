@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
     int recvLen;
 
     if(argc != 2) {
-        printf("Usage: %s [port]\n", argv[0]);
+        printf("Usage: %s <port>\n", argv[0]);
         exit(-1);
     }
     
@@ -63,5 +63,5 @@ void error_handling(const char *msg)
 {
     fputs(msg, stderr);
     fputc('\n', stderr);
-    return;
+    exit(-1);
 }

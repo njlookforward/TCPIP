@@ -1,3 +1,9 @@
+# 屏蔽各层级中的该文件夹
+**/.vscode/
+**/out/
+**/build/
+**/bin/
+
 # Prerequisites
 *.d
 
