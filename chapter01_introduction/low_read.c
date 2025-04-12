@@ -9,7 +9,7 @@ void error_handling(const char *msg);
 
 int main(void)
 {
-    int fd;
+    int fd, fd2;
     char msg[BUFSIZE];
     int strLen;
     
@@ -21,9 +21,20 @@ int main(void)
     strLen = read(fd, msg, sizeof(msg));
     if(strLen == -1)
         error_handling("read() error!");
+    msg[strLen] = '\0';
     // 预设：strLen == 0; msg is 乱码，想错了，效果很好，读取的是正确的
     printf("read %d bytes and msg is:\n%s", strLen, msg);
 
+    fd2 = open("test.dat", O_RDONLY);
+    if(fd2 == -1)
+        error_handling("open() error!");
+    
+    strLen = read(fd2, msg, sizeof(msg));
+    if(strLen == -1)
+        error_handling("read() error!");
+    printf("read %d bytes and msg is:\n%s", strLen, msg);
+
+    close(fd2);
     close(fd);
     return 0;
 }
