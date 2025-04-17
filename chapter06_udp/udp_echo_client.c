@@ -10,6 +10,8 @@
 
 void error_handling(const char *message);
 
+//// @attention 9190明明已经断开了，怎么client还可以连接？？？？
+
 int main(int argc, char *argv[])
 {
     int sock;
@@ -50,6 +52,9 @@ int main(int argc, char *argv[])
             error_handling("recvfrom() error!");
         message[strLen] = '\0';
         printf("Message from server: %s", message);
+        // BUG：这样逻辑就通顺了
+        if(!strcmp(message, "end\n"))
+            break;
     }
 
     close(sock);

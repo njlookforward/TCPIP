@@ -50,14 +50,13 @@ int main(int argc, char *argv[])
         else
             printf("receive message %d times.\n", ++i);
         
-        // BUG: 没有结束
-        message[strLen] = '\0'; // 对于recvfrom()函数，需要自己手动添加'\0'结束符
-        if(!strcmp(message, "end\n")) break;
-        
         strLen = sendto(sock, message, strLen, 0,
             (struct sockaddr*)&clnt_addr, sizeof(clnt_addr));
         if(strLen == -1)
             error_handling("sendto() error!");
+        // BUG: 没有结束, 应该把收到的数据echo返回给client，再关闭
+        message[strLen] = '\0'; // 对于recvfrom()函数，需要自己手动添加'\0'结束符
+        if(!strcmp(message, "end\n")) break;
     }
     
     close(sock);
